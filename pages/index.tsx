@@ -51,12 +51,14 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       posts,
+      timestamp: new Date(),
     },
   }
 }
 
 interface FeaturedPostsProps {
-  posts: Post[]
+  posts: Post[];
+  timestamp: Date;
 }
 
 interface Post {
@@ -65,7 +67,7 @@ interface Post {
   imgUrl: string
 }
 
-const Home: NextPage<FeaturedPostsProps> = ({ posts }) => {
+const Home: NextPage<FeaturedPostsProps> = ({ posts, timestamp }) => {
   return (
     <Fragment>
       <PageHeading>Featured Posts</PageHeading>
@@ -75,7 +77,7 @@ const Home: NextPage<FeaturedPostsProps> = ({ posts }) => {
         This means that if we refresh the page the images we see won&apos;t
         change unless we rebuild the site.
       </Text>
-      <SmallText>This page was generated: {new Date().toUTCString()}</SmallText>
+      <SmallText>This page was generated: {timestamp.toLocaleDateString()}</SmallText>
       <div className="mt-12 grid gap-6 grid-cols-medium">
         {posts.map(post => (
           <CardLink

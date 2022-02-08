@@ -4,7 +4,8 @@ import React from 'react'
 import { PageHeading, SmallText, Text } from '../components/typeography'
 
 interface RandomImageProps {
-  images: string[]
+  images: string[];
+  timestamp: Date;
 }
 
 export const getServerSideProps: GetServerSideProps<
@@ -17,11 +18,12 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       images: images.message,
+      timestamp: new Date(),
     },
   }
 }
 
-const RandomImage: NextPage<RandomImageProps> = ({ images }) => {
+const RandomImage: NextPage<RandomImageProps> = ({ images, timestamp }) => {
   return (
     <React.Fragment>
       <PageHeading>Images</PageHeading>
@@ -30,7 +32,7 @@ const RandomImage: NextPage<RandomImageProps> = ({ images }) => {
         API for each request. Refreshing the page will return a new set of
         images
       </Text>
-      <SmallText>This page was generated: {new Date().toUTCString()}</SmallText>
+      <SmallText>This page was generated: {timestamp.toUTCString()}</SmallText>
       <div className="mt-6 grid gap-6 grid-cols-medium justify-center items-center">
         {images.map((image, index) => (
           <div key={index} className="overflow-hidden flex rounded-3xl shadow-lg shadow-neutral-600">
