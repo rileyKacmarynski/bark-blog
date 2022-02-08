@@ -51,14 +51,14 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       posts,
-      timestamp: new Date(),
+      timestamp: new Date().toUTCString(),
     },
   }
 }
 
 interface FeaturedPostsProps {
   posts: Post[];
-  timestamp: Date;
+  timestamp: string;
 }
 
 interface Post {
@@ -77,7 +77,7 @@ const Home: NextPage<FeaturedPostsProps> = ({ posts, timestamp }) => {
         This means that if we refresh the page the images we see won&apos;t
         change unless we rebuild the site.
       </Text>
-      <SmallText>This page was generated: {timestamp.toLocaleDateString()}</SmallText>
+      <SmallText>This page was generated: {new Date(timestamp).toLocaleString()}</SmallText>
       <div className="mt-12 grid gap-6 grid-cols-medium">
         {posts.map(post => (
           <CardLink

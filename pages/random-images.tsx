@@ -5,7 +5,7 @@ import { PageHeading, SmallText, Text } from '../components/typeography'
 
 interface RandomImageProps {
   images: string[];
-  timestamp: Date;
+  timestamp: string;
 }
 
 export const getServerSideProps: GetServerSideProps<
@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       images: images.message,
-      timestamp: new Date(),
+      timestamp: new Date().toUTCString(),
     },
   }
 }
@@ -32,7 +32,7 @@ const RandomImage: NextPage<RandomImageProps> = ({ images, timestamp }) => {
         API for each request. Refreshing the page will return a new set of
         images
       </Text>
-      <SmallText>This page was generated: {timestamp.toUTCString()}</SmallText>
+      <SmallText>This page was generated: {new Date(timestamp).toLocaleString()}</SmallText>
       <div className="mt-6 grid gap-6 grid-cols-medium justify-center items-center">
         {images.map((image, index) => (
           <div key={index} className="overflow-hidden flex rounded-3xl shadow-lg shadow-neutral-600">
