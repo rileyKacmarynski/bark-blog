@@ -25,7 +25,7 @@ const variants = {
 
 const CardLink: React.FC<CardLinkProps> = post => {
   return (
-    <Link passHref href={`/breeds/${encodeURIComponent(post.slug)}`}>
+    <Link passHref href={`/breed/${encodeURIComponent(post.slug)}`}>
       <motion.div
         className={`pic-card overflow-hidden cursor-pointer rounded-3xl shadow-md hover:shadow-xl hover:shadow-neutral-600 transition-all duration-200 shadow-neutral-400 h-[300px] flex justify-center items-center`}
         whileHover="hover"

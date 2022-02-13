@@ -2,51 +2,12 @@ import { Fragment } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import CardLink from '../components/CardLink'
 import { PageHeading, SmallText, Text } from '../components/typeography'
-
-const makeUrl = (breedPathPart: string): string =>
-  `https://dog.ceo/api/breed/${breedPathPart}/images/random`
-
-const featuredBreeds = [
-  {
-    title: 'Akita',
-    pathPart: 'akita',
-    slug: 'akita',
-  },
-  {
-    title: 'Pitbull',
-    pathPart: 'pitbull',
-    slug: 'pitbull',
-  },
-  {
-    title: 'Husky',
-    pathPart: 'husky',
-    slug: 'husky',
-  },
-  {
-    title: 'French Bulldog',
-    pathPart: 'bulldog/french',
-    slug: 'french-bulldog',
-  },
-]
+import { getFeaturedPosts } from '../lib/barkBlogApi'
 
 export const getStaticProps: GetStaticProps<
   FeaturedPostsProps
-> = async context => {
-  const posts = await Promise.all(
-    featuredBreeds.map(async breed => {
-      const url = makeUrl(breed.pathPart)
-      const imgResposnse = await fetch(url)
-      const img = await imgResposnse.json()
-
-      console.log('image for ', breed.title)
-
-      return {
-        title: breed.title,
-        slug: breed.slug,
-        imgUrl: img.message as string,
-      }
-    })
-  )
+> = async () => {
+  const posts = await getFeaturedPosts()
 
   return {
     props: {
