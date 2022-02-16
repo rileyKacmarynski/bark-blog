@@ -75,10 +75,11 @@ const Breed: React.FC<BreedProps> = ({ title, content, image, timestamp }) => {
       <Text>
         Featured breeds are statically generated at build time. If{' '}
         <code>fallback</code> is set to <code>false</code>, then non-featured
-        breeds will return a <code>404</code> page. If <code>fallback</code> is {' '}
+        breeds will return a <code>404</code> page. If <code>fallback</code> is{' '}
         <code>true</code>, then Next.js will statically generate the page for
-        that breed. Next.js will add this path to the list of pre-rendered
-        pages. Susequent requests will serve the generated page.
+        that breed. <code>fallback blocking</code> will result in the page being
+        server-side rendered. Next.js will add this path to the list of
+        pre-rendered pages. Susequent requests will serve the generated page.
       </Text>
       <SmallText>
         Page generated at: {new Date(timestamp).toLocaleString()}

@@ -2,12 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 import { motion, Variants } from 'framer-motion'
 import MenuItem from './MenuItem'
-
-const links = [
-  { href: '/lists/1', text: 'List 1' },
-  { href: '/lists/2', text: 'List 2' },
-  { href: '/lists/3', text: 'List 3' },
-]
+import { Post } from '../../lib/barkBlogApi'
+import useSWR, { Fetcher } from 'swr'
 
 const sideNav: Variants = {
   open: {
@@ -57,7 +53,21 @@ const variants: Variants = {
   },
 }
 
+type Link = {
+  href: string;
+  text: string;
+}
+
+const fetcher: Fetcher<Post[]> = (url: string) => fetch(url).then(res => res.json())
+
 const NavMenu: React.FC = () => {
+  const { data: posts } = useSWR<Post[]>('/api/post', fetcher)
+
+  const links = posts?.map(post => ({ 
+    href: `/breed/${post.slug}`,
+    text: post.name,
+  })) ?? [{ href: '', text: 'Unable to fetch posts'}]
+
   return (
     <motion.div
       className="nav-height z-40 absolute w-[300px] shadow-lg bg-neutral-200 px-2 py-2"
@@ -73,7 +83,7 @@ const NavMenu: React.FC = () => {
         </MenuItem> 
         <motion.div variants={variants}>
           <div className="mt-1 text-lg flex items-center gap-2 w-full text-neutral-600 cursor-default">
-            <p className="flex-shrink-0">Link Group</p>
+            <p className="flex-shrink-0">Breeds</p>
             <span className='h-[1px] w-full z-40 left-0 mt-1 bg-neutral-400'/>
           </div>
           {links.map(link => (

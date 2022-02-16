@@ -5,9 +5,9 @@ import SideNavToggle from './SideNavToggle'
 import { motion } from 'framer-motion'
 import { useOnClickOutside } from '../../hooks'
 import { useNavMenu } from './NavMenuContext'
+import BreedMenu from '../BreedMenu'
 
 const Layout: React.FC = ({ children }) => {
-  // const [menuOpen, setMenuOpen] = useState(false)
   const clickOutsideRef = useRef(null)
   const { menuOpen, setMenuOpen } = useNavMenu()
 
