@@ -54,19 +54,20 @@ const variants: Variants = {
 }
 
 type Link = {
-  href: string;
-  text: string;
+  href: string
+  text: string
 }
 
-const fetcher: Fetcher<Post[]> = (url: string) => fetch(url).then(res => res.json())
+const fetcher: Fetcher<Post[]> = (url: string) =>
+  fetch(url).then(res => res.json())
 
 const NavMenu: React.FC = () => {
   const { data: posts } = useSWR<Post[]>('/api/post', fetcher)
 
-  const links = posts?.map(post => ({ 
+  const links = posts?.map(post => ({
     href: `/breed/${post.slug}`,
     text: post.name,
-  })) ?? [{ href: '', text: 'Unable to fetch posts'}]
+  })) ?? [{ href: '', text: 'Unable to fetch posts' }]
 
   return (
     <motion.div
@@ -77,14 +78,14 @@ const NavMenu: React.FC = () => {
       <motion.ul variants={navItems} className="py-2">
         <MenuItem>
           <Link href="/">Home</Link>
-        </MenuItem> 
+        </MenuItem>
         <MenuItem>
           <Link href="/random-images">Random Images</Link>
-        </MenuItem> 
+        </MenuItem>
         <motion.div variants={variants}>
           <div className="mt-1 text-lg flex items-center gap-2 w-full text-neutral-600 cursor-default">
             <p className="flex-shrink-0">Breeds</p>
-            <span className='h-[1px] w-full z-40 left-0 mt-1 bg-neutral-400'/>
+            <span className="h-[1px] w-full z-40 left-0 mt-1 bg-neutral-400" />
           </div>
           {links.map(link => (
             <MenuItem key={link.href}>

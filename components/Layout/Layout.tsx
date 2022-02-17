@@ -1,11 +1,10 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import NavMenu from './NavMenu'
 import Backdrop from './Backdrop'
 import SideNavToggle from './SideNavToggle'
 import { motion } from 'framer-motion'
 import { useOnClickOutside } from '../../hooks'
 import { useNavMenu } from './NavMenuContext'
-import BreedMenu from '../BreedMenu'
 
 const Layout: React.FC = ({ children }) => {
   const clickOutsideRef = useRef(null)
@@ -17,8 +16,16 @@ const Layout: React.FC = ({ children }) => {
 
   useOnClickOutside(clickOutsideRef, handleClickOutside)
 
+  useEffect(() => {
+    document.body.style.overflowY = menuOpen ? 'hidden' : 'initial'
+
+    return () => {
+      document.body.style.overflowY = 'initial'
+    }
+  }, [menuOpen])
+
   return (
-    <Fragment>
+    <div className="">
       <motion.div animate={menuOpen ? 'open' : 'closed'}>
         <div ref={clickOutsideRef}>
           <nav className="px-3 h-11 bg-sky-700 text-neutral-200 flex items-center justify-between font-semibold">
@@ -29,7 +36,7 @@ const Layout: React.FC = ({ children }) => {
         <Backdrop />
       </motion.div>
       <main className="content container mx-auto py-3 px-3">{children}</main>
-    </Fragment>
+    </div>
   )
 }
 
