@@ -18,12 +18,21 @@ const variants: Variants = {
     },
   },
 }
+
 const MenuItem: React.FC = ({ children }) => {
+  return (
+    <motion.div variants={variants}>
+      {children}
+    </motion.div>
+  )
+}
+
+const MenuLink: React.FC = ({ children }) => {
   const { setMenuOpen } = useNavMenu()
   const handleClick = () => {
-    console.log('trying to close menu')
     setMenuOpen(false)
   }
+
   return (
     <motion.li
       onClick={handleClick} 
@@ -37,4 +46,4 @@ const MenuItem: React.FC = ({ children }) => {
   )
 }
 
-export default MenuItem
+export { MenuLink, MenuItem}

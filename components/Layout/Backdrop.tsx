@@ -12,7 +12,7 @@ const variants: Variants = {
   closed: {
     opacity: 0,
     transition: {
-      duration: 0.2,
+      duration: 0.4,
       delay: 0.2,
     },
   },
@@ -27,9 +27,9 @@ const Backdrop: React.FC = () => {
         <motion.div
           className="nav-height absolute right-0 bottom-0 z-20 left-0 nav-height bg-black"
           variants={variants}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial="closed"
+          animate="open"
+          exit="closed"
         ></motion.div>
       )}
     </AnimatePresence>
