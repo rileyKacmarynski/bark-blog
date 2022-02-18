@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import NavMenu from './NavMenu'
 import Backdrop from './Backdrop'
 import SideNavToggle from './SideNavToggle'
@@ -25,7 +25,7 @@ const Layout: React.FC = ({ children }) => {
   }, [menuOpen])
 
   return (
-    <div className="">
+    <React.Fragment>
       <motion.div animate={menuOpen ? 'open' : 'closed'}>
         <div ref={clickOutsideRef}>
           <nav className="px-3 h-11 bg-sky-700 text-neutral-200 flex items-center justify-between font-semibold">
@@ -36,7 +36,7 @@ const Layout: React.FC = ({ children }) => {
         <Backdrop />
       </motion.div>
       <main className="content container mx-auto py-3 px-3">{children}</main>
-    </div>
+    </React.Fragment>
   )
 }
 

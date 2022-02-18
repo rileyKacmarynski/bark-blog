@@ -32,6 +32,8 @@ const Home: NextPage<FeaturedPostsProps> = ({ posts, timestamp }) => {
   return (
     <Fragment>
       <PageHeading>Featured Posts</PageHeading>
+      <div className="max-w-[65ch] mx-auto">
+
       <Text>
         This page is statically generated. The featured breeds are specified
         here and a random image is fetched for each breed from the Dog CEO API.
@@ -39,6 +41,7 @@ const Home: NextPage<FeaturedPostsProps> = ({ posts, timestamp }) => {
         change unless we rebuild the site.
       </Text>
       <SmallText>This page was generated: {new Date(timestamp).toLocaleString()}</SmallText>
+      </div>
       <div className="mt-12 grid gap-6 grid-cols-medium">
         {posts.map(post => (
           <CardLink

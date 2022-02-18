@@ -4,8 +4,8 @@ import React from 'react'
 import { PageHeading, SmallText, Text } from '../components/typeography'
 
 interface RandomImageProps {
-  images: string[];
-  timestamp: string;
+  images: string[]
+  timestamp: string
 }
 
 export const getServerSideProps: GetServerSideProps<
@@ -26,24 +26,31 @@ export const getServerSideProps: GetServerSideProps<
 const RandomImage: NextPage<RandomImageProps> = ({ images, timestamp }) => {
   return (
     <React.Fragment>
-      <PageHeading>Images</PageHeading>
-      <Text>
-        This page is server side rendered. Images are fetched from the Dog CEO
-        API for each request. Refreshing the page will return a new set of
-        images
-      </Text>
-      <SmallText>This page was generated: {new Date(timestamp).toLocaleString()}</SmallText>
+      <div className="max-w-[65ch] mx-auto">
+        <PageHeading>Images</PageHeading>
+        <Text>
+          This page is server side rendered. Images are fetched from the Dog CEO
+          API for each request. Refreshing the page will return a new set of
+          images
+        </Text>
+        <SmallText>
+          This page was generated: {new Date(timestamp).toLocaleString()}
+        </SmallText>
+      </div>
       <div className="mt-6 grid gap-6 grid-cols-medium justify-center items-center">
         {images.map((image, index) => (
-          <div key={index} className="overflow-hidden flex rounded-3xl shadow-lg shadow-neutral-600">
-          <Image
-            className=""
+          <div
             key={index}
-            src={image}
-            width={300}
-            height={300}
-            alt="Image of dog"
-          />
+            className="overflow-hidden flex rounded-3xl shadow-lg shadow-neutral-600"
+          >
+            <Image
+              className=""
+              key={index}
+              src={image}
+              width={300}
+              height={300}
+              alt="Image of dog"
+            />
           </div>
         ))}
       </div>

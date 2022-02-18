@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion'
-import React from 'react'
+import React, { AnchorHTMLAttributes, Children, ReactNode } from 'react'
 import { useNavMenu } from './NavMenuContext'
 
 const variants: Variants = {
@@ -20,11 +20,7 @@ const variants: Variants = {
 }
 
 const MenuItem: React.FC = ({ children }) => {
-  return (
-    <motion.div variants={variants}>
-      {children}
-    </motion.div>
-  )
+  return <motion.div variants={variants}>{children}</motion.div>
 }
 
 const MenuLink: React.FC = ({ children }) => {
@@ -35,7 +31,7 @@ const MenuLink: React.FC = ({ children }) => {
 
   return (
     <motion.li
-      onClick={handleClick} 
+      onClick={handleClick}
       className="cursor-pointer font-light py-1 px-2 hover:bg-slate-300 rounded-sm transition-colors"
       variants={variants}
       whileHover={{ scale: 1.01 }}
@@ -46,4 +42,4 @@ const MenuLink: React.FC = ({ children }) => {
   )
 }
 
-export { MenuLink, MenuItem}
+export { MenuLink, MenuItem }

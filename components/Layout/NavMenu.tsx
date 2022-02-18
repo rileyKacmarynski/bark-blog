@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { Post } from '../../lib/barkBlogApi'
-import useSWR, { Fetcher } from 'swr'
+import useSWR from 'swr'
 import { MenuLink, MenuItem } from './MenuItem'
 import AnimatedNav from './AnimatedNav'
 import fetcher from '../../lib/fetcher'
@@ -17,10 +17,10 @@ const NavMenu: React.FC = () => {
   return (
     <AnimatedNav>
       <MenuLink>
-        <Link href="/">Home</Link>
+        <Link prefetch={false} href="/">Home</Link>
       </MenuLink>
       <MenuLink>
-        <Link href="/random-images">Random Images</Link>
+        <Link prefetch={false} href="/random-images">Random Images</Link>
       </MenuLink>
       <div>
         <MenuItem>
@@ -30,9 +30,11 @@ const NavMenu: React.FC = () => {
           </div>
         </MenuItem>
         {links.map(link => (
-          <MenuLink key={link.href}>
-            <Link href={link.href}>{link.text}</Link>
-          </MenuLink>
+          <Link prefetch={false} key={link.href} href={link.href} passHref>
+            <a>
+              <MenuLink key={link.href}>{link.text}</MenuLink>
+            </a>
+          </Link>
         ))}
       </div>
     </AnimatedNav>
